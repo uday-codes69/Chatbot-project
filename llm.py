@@ -1,6 +1,7 @@
 import os
 from groq import Groq
 from dotenv import load_dotenv
+import streamlit as st
 from typing import Generator, Union, List, Dict
 
 load_dotenv()
@@ -10,7 +11,7 @@ class GroqLLM:
     A class to handle interactions with the Groq LLM API.
     """
     def __init__(self):
-        api_key = os.getenv("GROQ_API_KEY")
+        api_key = os.getenv("GROQ_API_KEY") or st.secrets.get("GROQ_API_KEY")
         if not api_key:
             # We don't raise value error here to avoid app crashing during startup 
             # if the key is missing; we'll handle it in the UI.
